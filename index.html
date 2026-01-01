@@ -401,5 +401,385 @@
         });
 
     </script>
+
+</p>
+
+    <!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resonance School | Architettura Sovrana & Specifiche Tecniche</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Chosen Palette: Ethereal Sovereign (Slate-50 Background, Slate-900 Text, Emerald-600 Bio-Accents, Cyan-600 Tech-Accents) -->
+    
+    <!-- Application Structure Plan: 
+         This SPA acts as the "Digital Blueprint & Execution Guide" for the physical construction of the Resonance School.
+         It synthesizes the technical specifications (Didaskalien) and the visual reality of the final building image into an interactive manual.
+         
+         Structure:
+         1. Header: Sovereign Status & Project Identity (MHC Validated).
+         2. Visual Manifestation (Hero Section): Displays the final rendering with interactive "Hotspots" explaining the key bio-tech features (Bio-Luminescent Matrix, Quartz Shield, Resonance Skeleton).
+         3. Technical Deep Dive (Tabs): Three dedicated sections for the core innovations:
+            - Primär-Resonator (Wood)
+            - Piezo-Haut (Clay)
+            - Myzel-Nervensystem (Mycelium)
+            Each section includes specific construction instructions ("Anweisung an die Umsetzer") derived from the source reports.
+         4. Live Fidelity Monitor (Simulation): A visual representation of the "Construction Fidelity Monitor" discussed in the source, tracking the alignment between physical build and digital blueprint.
+         5. Footer: Temporal Constant ("Nothing is Final").
+    -->
+
+    <!-- Visualization & Content Choices:
+         1. Interactive Blueprint (Custom HTML/CSS): Goal: Connect the visual image to technical specs. Method: Image with absolute positioned tooltips/markers. Justification: Best way to explain the complex visual features like the "Bio-Luminescent Matrix" in context.
+         2. Material Resonance Chart (Chart.js Line): Goal: Visualize the 0.043 Hz frequency response. Method: Dynamic Line Chart. Justification: Shows the "living" nature of the structure.
+    -->
+
+    <!-- CONFIRMATION: NO SVG graphics used (except Lucide icons rendered as vectors). NO Mermaid JS used. -->
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border-radius: 1rem;
+        }
+
+        .hotspot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(6, 182, 212, 0.8); /* Cyan-500 */
+            border: 2px solid white;
+            border-radius: 50%;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+            transition: transform 0.2s;
+        }
+
+        .hotspot:hover {
+            transform: scale(1.2);
+            background-color: #0ea5e9;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            max-height: 250px;
+        }
+        
+        .tab-active {
+            border-bottom: 2px solid #059669; /* Emerald-600 */
+            color: #059669;
+            background-color: #ecfdf5;
+        }
+
+        .tab-inactive {
+            color: #64748b;
+        }
+        .tab-inactive:hover {
+            color: #334155;
+            background-color: #f1f5f9;
+        }
+    </style>
+</head>
+<body class="min-h-screen p-4 md:p-8 flex flex-col gap-8">
+
+    <!-- HEADER: Sovereign Status -->
+    <header class="w-full max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end border-b border-slate-200 pb-6">
+        <div>
+            <div class="flex items-center gap-3">
+                <div class="h-3 w-3 bg-emerald-500 rounded-full animate-pulse"></div>
+                <h1 class="text-3xl font-bold tracking-tight text-slate-900">RESONANCE SCHOOL</h1>
+            </div>
+            <p class="text-sm text-slate-500 mt-2 uppercase tracking-widest">Guida Tecnica all'Eternizzazione Bio-Organica</p>
+        </div>
+        <div class="text-right mt-4 md:mt-0">
+            <div class="text-xs font-bold text-cyan-700 mono bg-cyan-50 px-3 py-1 rounded-full border border-cyan-100">
+                TS 693.0 CC | MHC VALIDATED
+            </div>
+            <div class="text-[10px] text-slate-400 mt-1 uppercase italic">Nothing is Final (Temporal)</div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- VISUAL MANIFESTATION (Left Column) -->
+        <section class="lg:col-span-7 flex flex-col gap-6">
+            
+            <!-- Context Card -->
+            <div class="glass-panel p-6">
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Manifestazione Visiva Finale</h2>
+                <p class="text-sm text-slate-600 leading-relaxed mb-4">
+                    Questa non è una rappresentazione artistica, ma la <strong>Validazione della Materia</strong>. 
+                    Il modello mostra l'integrazione fisica del Red Shield e della rigenerazione T-7. 
+                    <span class="font-bold text-emerald-600">Interagisci con i punti chiave per vedere le specifiche tecniche.</span>
+                </p>
+
+                <!-- Interactive Blueprint Area -->
+                <div class="relative w-full aspect-video bg-slate-900 rounded-xl overflow-hidden shadow-2xl group">
+                    <!-- Placeholder for the Image - Using a stylized CSS representation for the "Structure" -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-black opacity-90"></div>
+                    
+                    <!-- Abstract representation of the curved roof -->
+                    <div class="absolute top-1/4 left-10 right-10 h-1/2 border-t-4 border-amber-500/50 rounded-[50%] blur-sm"></div>
+                    <div class="absolute top-1/3 left-20 right-20 h-1/2 border-t-2 border-cyan-400/30 rounded-[50%] animate-pulse"></div>
+                    
+                    <!-- Hotspots -->
+                    <div class="hotspot" style="top: 30%; left: 50%;" onclick="showDetail('shield')" title="Quarz-Resonatoren (Shield)"></div>
+                    <div class="hotspot" style="top: 60%; left: 30%;" onclick="showDetail('matrix')" title="Bio-Lumineszente Matrix"></div>
+                    <div class="hotspot" style="top: 50%; left: 70%;" onclick="showDetail('skeleton')" title="Resonanz-Skelett"></div>
+                    <div class="hotspot" style="bottom: 10%; left: 50%;" onclick="showDetail('monolith')" title="Monolith (Zeit-Anker)"></div>
+
+                    <!-- Overlay Text -->
+                    <div class="absolute bottom-4 left-4 text-white text-xs mono opacity-70">
+                        BOLZANO ROOT NODE | ARCHIV 71
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detail Display Area (Dynamic) -->
+            <div id="detail-panel" class="glass-panel p-6 bg-slate-50 border-l-4 border-cyan-500 transition-all duration-300">
+                <h3 class="text-lg font-bold text-cyan-700 mb-2" id="detail-title">Seleziona un Hotspot</h3>
+                <p class="text-sm text-slate-600" id="detail-desc">Esplora i componenti bio-tecnologici della struttura cliccando sui punti attivi nell'immagine sopra.</p>
+                <div id="detail-specs" class="mt-4 pt-4 border-t border-slate-200 hidden">
+                    <h4 class="text-xs font-bold text-slate-500 uppercase mb-2">Specifiche di Implementazione:</h4>
+                    <ul class="text-xs text-slate-700 space-y-1 mono list-disc pl-4" id="detail-list"></ul>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TECHNICAL DEEP DIVE (Right Column) -->
+        <section class="lg:col-span-5 flex flex-col gap-6">
+
+            <!-- Construction Protocols Tabs -->
+            <div class="glass-panel overflow-hidden">
+                <div class="flex border-b border-slate-200 bg-slate-50">
+                    <button onclick="switchTab('wood')" id="tab-wood" class="tab-active flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors">
+                        1. Legno
+                    </button>
+                    <button onclick="switchTab('clay')" id="tab-clay" class="tab-inactive flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors">
+                        2. Lehm
+                    </button>
+                    <button onclick="switchTab('mycelium')" id="tab-mycelium" class="tab-inactive flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors">
+                        3. Myzel
+                    </button>
+                </div>
+
+                <div class="p-6 min-h-[300px]">
+                    <!-- WOOD CONTENT -->
+                    <div id="content-wood" class="block">
+                        <h3 class="text-lg font-bold text-amber-700 mb-2">Il Primär-Resonator</h3>
+                        <p class="text-xs text-slate-500 italic mb-4">"La struttura non è statica; è un'antenna analogica."</p>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-amber-50 p-3 rounded border border-amber-100">
+                                <h4 class="text-xs font-bold text-amber-800 uppercase mb-1">Tecnica di Posa</h4>
+                                <p class="text-xs text-slate-700 leading-relaxed">
+                                    Lamelliertes Fichtenholz, dampfgebogen unter konstanter Beschallung mit <strong>0.043 Hz</strong>. 
+                                    Le travi devono essere pre-tensionate per garantire la coerenza di fase.
+                                </p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                                <h4 class="text-xs font-bold text-slate-700 uppercase mb-1">Anweisung (Istruzione)</h4>
+                                <p class="text-xs text-slate-600">
+                                    Evitare giunzioni metalliche rigide. Utilizzare incastri elastici MHC per prevenire nodi entropici.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CLAY CONTENT -->
+                    <div id="content-clay" class="hidden">
+                        <h3 class="text-lg font-bold text-orange-700 mb-2">La Piezo-Haut (Pelle)</h3>
+                        <p class="text-xs text-slate-500 italic mb-4">"Batteria termica e scudo elettromagnetico."</p>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-orange-50 p-3 rounded border border-orange-100">
+                                <h4 class="text-xs font-bold text-orange-800 uppercase mb-1">Composizione Mix</h4>
+                                <p class="text-xs text-slate-700 leading-relaxed">
+                                    Argilla cruda locale + 5% Sabbia Silicea (Quarzo) + Fibre di Canapa. 
+                                    Il Quarzo funge da <strong>trasduttore piezoelettrico</strong> per il Red Shield.
+                                </p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                                <h4 class="text-xs font-bold text-slate-700 uppercase mb-1">Anweisung (Istruzione)</h4>
+                                <p class="text-xs text-slate-600">
+                                    Applicare in strati da 1.5cm con generatore di campo attivo per orientare i cristalli verso l'esterno (Deflessione).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MYCELIUM CONTENT -->
+                    <div id="content-mycelium" class="hidden">
+                        <h3 class="text-lg font-bold text-emerald-700 mb-2">Il Myzel-Nervensystem</h3>
+                        <p class="text-xs text-slate-500 italic mb-4">"Il cervello analogico che ripara la struttura."</p>
+                        
+                        <div class="space-y-4">
+                            <div class="bg-emerald-50 p-3 rounded border border-emerald-100">
+                                <h4 class="text-xs font-bold text-emerald-800 uppercase mb-1">Logica Biologica</h4>
+                                <p class="text-xs text-slate-700 leading-relaxed">
+                                    Rete di <em>Ganoderma Lucidum</em> inoculata nelle intercapedini. 
+                                    Funziona come un <strong>computer analogico</strong> che rileva lo stress e densifica la materia (T-7).
+                                </p>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded border border-slate-200">
+                                <h4 class="text-xs font-bold text-slate-700 uppercase mb-1">Anweisung (Istruzione)</h4>
+                                <p class="text-xs text-slate-600">
+                                    Collegare il substrato a elettrodi in rame (Sovereign Vault Link) per nutrire il sistema con bio-impulsi.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fidelity Monitor Chart -->
+            <div class="glass-panel p-6">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-sm font-bold text-slate-700 uppercase">Monitor Fidelità (Live)</h3>
+                    <span class="text-xs font-mono text-emerald-600">98.4% MATCH</span>
+                </div>
+                <div class="chart-container">
+                    <canvas id="fidelityChart"></canvas>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-2 text-center">
+                    Confronto in tempo reale tra Modello Digitale (MHC) e Costruzione Fisica.
+                </p>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="w-full max-w-7xl mx-auto py-8 text-center text-slate-400 text-xs border-t border-slate-200 mt-4">
+        <p class="mono uppercase tracking-[0.3em] mb-2">Hannes Mitterer | Resonance School</p>
+        <p>"L'architettura non è un oggetto, è un'emanazione. <span class="text-slate-600 font-bold">NOTHING IS FINAL, ❤️</span>"</p>
+    </footer>
+
+    <!-- LOGIC -->
+    <script>
+        // --- DATA ---
+        const details = {
+            shield: {
+                title: "Die Kristalline Oberfläche (Der Schild)",
+                desc: "Quarz-Resonatoren, die in einem 45-Grad-Winkel in den Lehm eingebettet sind. Sie brechen eintreffende EM-Wellen und wandeln sie in mechanische Mikroschwingungen um.",
+                specs: ["Winkel: 45° zur Faser", "Material: Grobflächiger Quarz", "Funktion: Red Shield Antenne"]
+            },
+            matrix: {
+                title: "Die Bio-Lumineszente Matrix",
+                desc: "Das cyan-farbene Leuchten visualisiert die biologische Kommunikation des Myzel-Nervensystems. Intensiviert sich bei Selbst-Reparatur (T-7).",
+                specs: ["Glasfaser-Lichtleiter (Analog)", "Koppelung: Piezoelektrisch", "Indikator: Energiefluss"]
+            },
+            skeleton: {
+                title: "Das Resonanz-Skelett",
+                desc: "Tragstruktur aus lamelliertem Fichtenholz, die der Fibonacci-Sequenz der MHC-Frequenz folgt. Durch Myzel mineralisiert für ewige Haltbarkeit.",
+                specs: ["Frequenz: 0.043 Hz", "Form: Fibonacci-Kurvatur", "Härte: > Beton (Mineralisiert)"]
+            },
+            monolith: {
+                title: "Der Monolith (Zeit-Anker)",
+                desc: "Gneis-Monolith mit der Gravur 'TS 693.0 CC'. Dient als physischer Referenzwert für die Frequenzstabilität der gesamten Schule.",
+                specs: ["Material: Gneis", "Funktion: System-Erdung", "Gravur: NOTHING IS FINAL"]
+            }
+        };
+
+        // --- INTERACTION ---
+        function showDetail(key) {
+            const data = details[key];
+            document.getElementById('detail-title').innerText = data.title;
+            document.getElementById('detail-desc').innerText = data.desc;
+            
+            const list = document.getElementById('detail-list');
+            list.innerHTML = '';
+            data.specs.forEach(spec => {
+                const li = document.createElement('li');
+                li.innerText = spec;
+                list.appendChild(li);
+            });
+            
+            document.getElementById('detail-specs').classList.remove('hidden');
+        }
+
+        function switchTab(id) {
+            // Reset Tabs
+            ['wood', 'clay', 'mycelium'].forEach(t => {
+                const btn = document.getElementById(`tab-${t}`);
+                const content = document.getElementById(`content-${t}`);
+                
+                if (t === id) {
+                    btn.className = "tab-active flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors";
+                    content.classList.remove('hidden');
+                } else {
+                    btn.className = "tab-inactive flex-1 py-3 text-xs font-bold uppercase tracking-wider transition-colors";
+                    content.classList.add('hidden');
+                }
+            });
+        }
+
+        // --- CHART ---
+        function initChart() {
+            const ctx = document.getElementById('fidelityChart').getContext('2d');
+            
+            // Mock Data for Real-time Fidelity
+            const dataPoints = Array.from({length: 20}, () => 98 + Math.random() * 2); 
+            const labels = Array.from({length: 20}, (_, i) => i);
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Allineamento Fisico-Digitale (%)',
+                        data: dataPoints,
+                        borderColor: '#059669', // Emerald
+                        backgroundColor: 'rgba(5, 150, 105, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { min: 95, max: 100, grid: { color: '#e2e8f0' } },
+                        x: { display: false }
+                    },
+                    animation: { duration: 2000 }
+                }
+            });
+        }
+
+        window.onload = initChart;
+    </script>
+</body>
+    </html>
+        
 </body>
 </html>
